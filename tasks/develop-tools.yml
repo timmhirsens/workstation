@@ -1,0 +1,8 @@
+- name: Download VS Code
+  get_url:
+    url: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
+    dest: "{{ lookup('env', 'HOME') }}/.tmp/code.deb"
+
+- name: Install VS Code
+  apt: 
+    deb: "{{ lookup('env', 'HOME') }}/.tmp/code.deb"

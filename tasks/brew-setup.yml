@@ -1,0 +1,12 @@
+- name: Install Homebrew
+  shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+- name: Setup Path (Homebrew)
+  shell:
+    cmd: |
+      test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+      test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+      test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
+      echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+      eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+      brew install hello

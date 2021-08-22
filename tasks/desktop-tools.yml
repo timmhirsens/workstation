@@ -1,0 +1,8 @@
+- name: flat-remix ppa (ppa:daniruiz/flat-remix)
+  apt_repository:
+   repo: ppa:daniruiz/flat-remix
+   state: present
+   update_cache: True
+- name: Install packages
+  apt: 
+    name: ['redshift-gtk', 'feh', 'lxappearance', 'flat-remix-gtk', 'arc-theme', 'gnome-tweaks', 'rofi', 'xautolock', 'i3lock']
