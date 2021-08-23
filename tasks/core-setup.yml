@@ -3,11 +3,23 @@
     name: ["build-essential", "cmake", "pkg-config", "libpthread-stubs0-dev"]
 - name: Install System Packages 2 (lua, unzip, libtool, libtool-bin, gettext)
   apt:
-    name: [ "unzip", "libtool", "libtool-bin", "gettext"]
+    name: [ "unzip", "zip", "libtool", "libtool-bin", "gettext"]
 - name: Install System Packages 3 (the rest)
   apt: 
     name: ['curl', 'htop', 'lsof', 'i3', 'ccache', 'ninja-build', 'python3-pip', 'dconf-editor', 'pavucontrol', 'clangd', 'bat', 'xbacklight', 'feh' ]
 - name: ensure tmp directory exists
   file:
     path: "{{ lookup('env', 'HOME') }}/.tmp/"
+    state: directory
+- name: ensure local bin directory exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/bin/"
+    state: directory
+- name: ensure local share applications directory exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/share/applications/"
+    state: directory
+- name: ensure local share fonts directory exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/share/fonts/"
     state: directory

@@ -1,3 +1,18 @@
+- name: Install SDKMAN!
+  shell: curl -s "https://get.sdkman.io" | bash
+
+- name: Install FNM
+  shell: curl -fsSL https://fnm.vercel.app/install | bash
+
+- name: Install RVM
+  shell: 
+    cmd: |
+      curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+      curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+      echo 409B6B1796C275462A1703113804BB82D39DC0E3:6: | gpg2 --import-ownertrust # mpapis@gmail.com
+      echo 7D2BAF1CF37B13E2069D6956105BD0E739499BDB:6: | gpg2 --import-ownertrust # piotr.kuczynski@gmail.com
+      curl -sSL https://get.rvm.io | bash -s stable
+
 - name: Download VS Code
   get_url:
     url: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
@@ -6,3 +21,20 @@
 - name: Install VS Code
   apt: 
     deb: "{{ lookup('env', 'HOME') }}/.tmp/code.deb"
+
+- name: Install kitty
+  shell: curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+
+- name: Setup Kitty Desktop
+  shell:
+    cmd: |
+        ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/
+        cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
+        sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty.desktop
+
+- name: JetBrains Toolbox
+  unarchive: 
+    src: https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.21.9712.tar.gz
+    dest: "{{ lookup('env', 'HOME') }}/.local/bin"
+    remote_src: yes
+

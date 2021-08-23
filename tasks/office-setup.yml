@@ -1,0 +1,45 @@
+- name: Download Slack
+  get_url:
+    url: https://downloads.slack-edge.com/linux_releases/slack-desktop-4.8.0-amd64.deb
+    dest: "{{ lookup('env', 'HOME') }}/.tmp/slack.deb"
+
+- name: Remove Any previous slacks
+  apt:
+    name: slack-desktop
+    state: absent
+
+- name: Install Slack .deb package
+  apt:
+    deb: "{{ lookup('env', 'HOME') }}/.tmp/slack.deb"
+
+- name: Download MS Teams
+  get_url: 
+    url: https://packages.microsoft.com/repos/ms-teams/pool/main/t/teams/teams_1.4.00.13653_amd64.deb
+    dest: "{{ lookup('env', 'HOME') }}/.tmp/teams.deb"
+
+- name: Remove Any previous teams
+  apt:
+    name: teams
+    state: absent
+
+- name: Install teams .deb package
+  apt:
+    deb: "{{ lookup('env', 'HOME') }}/.tmp/teams.deb"
+
+- name: Download 1password
+  get_url: 
+    url: https://downloads.1password.com/linux/debian/amd64/stable/1password-latest.deb
+    dest: "{{ lookup('env', 'HOME') }}/.tmp/1password.deb"
+
+- name: Remove Any previous 1password
+  apt:
+    name: 1password
+    state: absent
+
+- name: Install 1password .deb package
+  apt:
+    deb: "{{ lookup('env', 'HOME') }}/.tmp/1password.deb"
+
+## TODO
+# OneDrive
+#

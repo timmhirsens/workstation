@@ -16,3 +16,4 @@
     - include: tasks/productivity-tools.yml
     - include: tasks/desktop-tools.yml
     - include: tasks/brew-setup.yml
+    - include: tasks/office-setup.yml
