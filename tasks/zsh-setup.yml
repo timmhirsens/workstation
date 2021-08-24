@@ -1,14 +1,32 @@
 - name: Install ZSH
   apt: name=zsh
+
 - name: Change shell to zsh
   shell: chsh -s $(which zsh)
+
 - name: Install Oh-my-ZSH
   shell: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 - name: Install Starship
   shell: sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- -y
-- name: Install NerdFonts
+
+- name: Install JetBrains Mono NerdFonts
   unarchive:
     src: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
     dest: "{{ lookup('env', 'HOME') }}/.local/share/fonts"
     remote_src: yes
+
+- name: Download JetBrains Mono
+  unarchive:
+    src: https://download.jetbrains.com/fonts/JetBrainsMono-2.242.zip
+    dest: "{{ lookup('env', 'HOME') }}/.tmp/JetBrainsMono"
+    remote_src: yes
+
+- name: Install JetBrains Mono
+  ansible.posix.synchronize:
+    src: "{{ lookup('env', 'HOME') }}/.tmp/JetBrainsMono/fonts/ttf/" 
+    dest: "{{ lookup('env', 'HOME') }}/.local/share/fonts"
+
+- name: Update font-cache
+  shell: fc-cache -fv
 

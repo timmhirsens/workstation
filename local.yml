@@ -15,5 +15,9 @@
     - include: tasks/nvim-setup.yml
     - include: tasks/productivity-tools.yml
     - include: tasks/desktop-tools.yml
-    - include: tasks/brew-setup.yml
+      # Brew mach ein paar Probleme mit Python usw..
+      #    - include: tasks/brew-setup.yml
     - include: tasks/office-setup.yml
+    - include: tasks/docker.yml
+    - include: tasks/dotfiles.yml
+
