@@ -23,7 +23,7 @@
     remote_src: yes
 
 - name: Install JetBrains Mono
-  ansible.posix.synchronize:
+  synchronize:
     src: "{{ lookup('env', 'HOME') }}/.tmp/JetBrainsMono/fonts/ttf/" 
     dest: "{{ lookup('env', 'HOME') }}/.local/share/fonts"
 
