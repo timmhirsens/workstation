@@ -16,6 +16,11 @@
     dest: "{{ lookup('env', 'HOME') }}/.local/share/fonts"
     remote_src: yes
 
+- name: ensure tmp directory exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.tmp/JetBrainsMono/"
+    state: directory
+
 - name: Download JetBrains Mono
   unarchive:
     src: https://download.jetbrains.com/fonts/JetBrainsMono-2.242.zip
