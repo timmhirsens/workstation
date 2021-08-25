@@ -33,7 +33,7 @@
   shell:
     cmd: |
         ln -s {{ lookup('env', 'HOME') }}/.local/kitty.app/bin/kitty {{ lookup('env', 'HOME') }}//.local/bin/
-        cp {{ lookup('env', 'HOME') }}//.local/kitty.app/share/applications/kitty.desktop {{ lookup('env', 'HOME') }}/.local/share/applications/
+        cp {{ lookup('env', 'HOME') }}/.local/kitty.app/share/applications/kitty.desktop {{ lookup('env', 'HOME') }}/.local/share/applications/
         sed -i "s|Icon=kitty|Icon={{ lookup('env', 'HOME') }}/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty.desktop
 
 - name: JetBrains Toolbox
