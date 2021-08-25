@@ -5,11 +5,25 @@
   become: yes
   shell: "chsh -s $(which zsh) {{ lookup('env', 'USER') }}"
 
-- name: Install Oh-my-ZSH
-  shell: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+- name: Download OMZ
+  get_url:
+    url: "https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
+    dest: "{{ lookup('env', 'HOME') }}/.tmp/omz.sh"
+
+- name: Install OMZ
+  become: no
+  script:
+    cmd: "{{ lookup('env', 'HOME') }}/.tmp/omz.sh"
+
+- name: Download Starship
+  get_url:
+    url: "https://starship.rs/install.sh"
+    dest: "{{ lookup('env', 'HOME') }}/.tmp/starship.sh"
 
 - name: Install Starship
-  shell: sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- -y
+  become: no
+  script:
+    cmd: "{{ lookup('env', 'HOME') }}/.tmp/starship.sh"
 
 - name: Install JetBrains Mono NerdFonts
   unarchive:
