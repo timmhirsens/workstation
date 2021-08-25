@@ -11,5 +11,6 @@
     version: main
 
 - name: Stow dotfiles
-  shell: cd $HOME/.dotfiles && ./install
-
+  become: no
+  script:
+    cmd: "{{ lookup('env', 'HOME') }}/.dotfiles/install"
