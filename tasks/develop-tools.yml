@@ -1,20 +1,41 @@
+- name: Download SDKMAN!
+  get_url:
+    url: "https://get.sdkman.io"
+    dest: "{{ lookup('env', 'HOME') }}/.tmp/sdkman.sh"
+
 - name: Install SDKMAN!
   become: no
-  shell: curl -s "https://get.sdkman.io" | bash
+  script:
+    cmd: "{{ lookup('env', 'HOME') }}/.tmp/sdkman.sh"
+
+- name: Download FNM
+  get_url:
+    url: "https://fnm.vercel.app/install"
+    dest: "{{ lookup('env', 'HOME') }}/.tmp/fnm.sh"
 
 - name: Install FNM
   become: no
-  shell: curl -fsSL https://fnm.vercel.app/install | bash
+  script:
+    cmd: "{{ lookup('env', 'HOME') }}/.tmp/fnm.sh"
 
-- name: Install RVM
+- name: Setup RVM Install
   become: no
   shell: 
     cmd: |
       curl -sSL https://rvm.io/mpapis.asc | gpg --import -
       curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
-      echo 409B6B1796C275462A1703113804BB82D39DC0E3:6: | gpg2 --import-ownertrust # mpapis@gmail.com
-      echo 7D2BAF1CF37B13E2069D6956105BD0E739499BDB:6: | gpg2 --import-ownertrust # piotr.kuczynski@gmail.com
-      curl -sSL https://get.rvm.io | bash -s stable
+      echo 409B6B1796C275462A1703113804BB82D39DC0E3:6: | gpg --import-ownertrust # mpapis@gmail.com
+      echo 7D2BAF1CF37B13E2069D6956105BD0E739499BDB:6: | gpg --import-ownertrust # piotr.kuczynski@gmail.com
+
+- name: Download RVM
+  get_url:
+    url: "https://get.rvm.io"
+    dest: "{{ lookup('env', 'HOME') }}/.tmp/rvm.sh"
+
+- name: Install FNM
+  become: no
+  script:
+    cmd: "{{ lookup('env', 'HOME') }}/.tmp/rvm.sh"
 
 - name: Download VS Code
   get_url:
@@ -26,8 +47,15 @@
   apt: 
     deb: "{{ lookup('env', 'HOME') }}/.tmp/code.deb"
 
+- name: Download kitty
+  get_url:
+    url: "https://sw.kovidgoyal.net/kitty/installer.sh"
+    dest: "{{ lookup('env', 'HOME') }}/.tmp/kitty.sh"
+
 - name: Install kitty
-  shell: curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+  become: no
+  script:
+    cmd: "{{ lookup('env', 'HOME') }}/.tmp/kitty.sh"
 
 - name: Setup Kitty Desktop
   shell:
