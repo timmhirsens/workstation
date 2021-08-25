@@ -64,6 +64,10 @@
         cp {{ lookup('env', 'HOME') }}/.local/kitty.app/share/applications/kitty.desktop {{ lookup('env', 'HOME') }}/.local/share/applications/
         sed -i "s|Icon=kitty|Icon={{ lookup('env', 'HOME') }}/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" {{ lookup('env', 'HOME') }}/.local/share/applications/kitty.desktop
 
+- name: Setup Kitty
+  shell: "update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator {{ lookup('env', 'HOME') }}/.local/bin/kitty 50"
+  become: yes
+
 - name: JetBrains Toolbox
   unarchive: 
     src: https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.21.9712.tar.gz
