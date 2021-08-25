@@ -19,6 +19,7 @@
     dest: "{{ lookup('env', 'HOME') }}/.tmp/code.deb"
 
 - name: Install VS Code
+  become: yes
   apt: 
     deb: "{{ lookup('env', 'HOME') }}/.tmp/code.deb"
 

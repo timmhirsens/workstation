@@ -4,11 +4,13 @@
     dest: "{{ lookup('env', 'HOME') }}/.tmp/slack.deb"
 
 - name: Remove Any previous slacks
+  become: yes
   apt:
     name: slack-desktop
     state: absent
 
 - name: Install Slack .deb package
+  become: yes
   apt:
     deb: "{{ lookup('env', 'HOME') }}/.tmp/slack.deb"
 
@@ -18,11 +20,13 @@
     dest: "{{ lookup('env', 'HOME') }}/.tmp/teams.deb"
 
 - name: Remove Any previous teams
+  become: yes
   apt:
     name: teams
     state: absent
 
 - name: Install teams .deb package
+  become: yes
   apt:
     deb: "{{ lookup('env', 'HOME') }}/.tmp/teams.deb"
 
@@ -32,11 +36,13 @@
     dest: "{{ lookup('env', 'HOME') }}/.tmp/1password.deb"
 
 - name: Remove Any previous 1password
+  become: yes
   apt:
     name: 1password
     state: absent
 
 - name: Install 1password .deb package
+  become: yes
   apt:
     deb: "{{ lookup('env', 'HOME') }}/.tmp/1password.deb"
 

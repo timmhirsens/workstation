@@ -5,4 +5,5 @@
 - name: Build neovim
   shell: "cd {{ lookup('env', 'HOME') }}/neovim && make"
 - name: Install neovim
+  become: yes
   shell: "cd {{ lookup('env', 'HOME') }}/neovim && make install"

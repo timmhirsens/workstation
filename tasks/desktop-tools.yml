@@ -1,10 +1,12 @@
 - name: flat-remix ppa (ppa:daniruiz/flat-remix)
+  become: yes
   apt_repository:
    repo: ppa:daniruiz/flat-remix
    state: present
    update_cache: True
 
 - name: Install packages
+  become: yes
   apt: 
     name: ['redshift-gtk', 'feh', 'lxappearance', 'flat-remix-gtk', 'arc-theme', 'gnome-tweaks', 'rofi', 'xautolock', 'i3lock']
 
@@ -14,5 +16,6 @@
     dest: "{{ lookup('env', 'HOME') }}/.tmp/i3-gnome"
 
 - name: Build and install i3-gnome
+  become: yes
   shell: "cd {{ lookup('env', 'HOME') }}/.tmp/i3-gnome && make install"
 
