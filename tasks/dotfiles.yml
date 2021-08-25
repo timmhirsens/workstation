@@ -10,6 +10,11 @@
     accept_hostkey: yes
     version: main
 
+- name: remove existing dotfiles (zsh)
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.zshrc"
+    state: absent
+
 - name: Stow dotfiles
   become: no
   script:

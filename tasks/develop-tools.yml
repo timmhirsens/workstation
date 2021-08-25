@@ -68,6 +68,17 @@
   shell: "update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator {{ lookup('env', 'HOME') }}/.local/bin/kitty 50"
   become: yes
 
+- name: Clone kitty themes
+  git:
+    repo: 'https://github.com/dexpota/kitty-themes.git'
+    dest: "{{ lookup('env', 'HOME') }}/.config/kitty/kitty-themes"
+
+- name: Link kitty themes
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/kitty/theme.conf"
+    src: "{{ lookup('env', 'HOME') }}/.config/kitty/kitty-themes/themes/OneDark.conf"
+    state: link
+
 - name: JetBrains Toolbox
   unarchive: 
     src: https://download.jetbrains.com/toolbox/jetbrains-toolbox-1.21.9712.tar.gz
