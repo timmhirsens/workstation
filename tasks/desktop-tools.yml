@@ -5,10 +5,17 @@
    state: present
    update_cache: True
 
+- name: i3-gaps ppa (ppa:regolith-linux/release)
+  become: yes
+  apt_repository:
+   repo: ppa:regolith-linux/release
+   state: present
+   update_cache: True
+
 - name: Install packages
   become: yes
   apt: 
-    name: ['redshift-gtk', 'feh', 'lxappearance', 'flat-remix-gtk', 'arc-theme', 'gnome-tweaks', 'rofi', 'xautolock', 'i3lock']
+    name: ['i3-gaps', 'redshift-gtk', 'feh', 'lxappearance', 'flat-remix-gtk', 'arc-theme', 'gnome-tweaks', 'rofi', 'xautolock', 'i3lock', "dunst"]
 
 - name: Clone i3-gnome
   ansible.builtin.git:
@@ -19,3 +26,27 @@
   become: yes
   shell: "cd {{ lookup('env', 'HOME') }}/.tmp/i3-gnome && make install"
 
+- name: Clone Polybar
+  git:
+    repo: "https://github.com/polybar/polybar.git"
+    dest: "{{ lookup('env', 'HOME') }}/.tmp/polybar"
+
+- name: Install polybar dependencies
+  become: yes
+  apt: 
+    name: ["cmake", "cmake-data", "pkg-config", "python3-sphinx", "python3-packaging", "libcairo2-dev", "libxcb1-dev", "libxcb-util0-dev", "libxcb-randr0-dev", "libxcb-composite0-dev", "python3-xcbgen", "xcb-proto", "libxcb-image0-dev", "libxcb-ewmh-dev", "libxcb-icccm4-dev"]
+
+- name: Install polybar dependencies
+  become: yes
+  apt: 
+    name: ["libxcb-xkb-dev", "libxcb-xrm-dev", "libxcb-cursor-dev", "libasound2-dev", "libpulse-dev", "i3-wm", "libjsoncpp-dev", "libmpdclient-dev", "libcurl4-openssl-dev", "libnl-genl-3-dev"]
+
+- name: Build and install polybar
+  become: yes
+  shell: 
+    cmd: |
+      mkdir {{ lookup('env', 'HOME') }}/.tmp/polybar/build
+      cd {{ lookup('env', 'HOME') }}/.tmp/polybar/build
+      cmake ..
+      make -j$(nproc)
+      make install

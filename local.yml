@@ -9,12 +9,12 @@
       changed_when: False
   tasks:
     - include: tasks/core-setup.yml
-    - include: tasks/develop-tools.yml
     - include: tasks/picom-setup.yml
+    - include: tasks/desktop-tools.yml
     - include: tasks/zsh-setup.yml
+    - include: tasks/develop-tools.yml
     - include: tasks/nvim-setup.yml
     - include: tasks/productivity-tools.yml
-    - include: tasks/desktop-tools.yml
       # Brew mach ein paar Probleme mit Python usw..
       #    - include: tasks/brew-setup.yml
     - include: tasks/office-setup.yml

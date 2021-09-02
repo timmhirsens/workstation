@@ -31,6 +31,8 @@
     dest: "{{ lookup('env', 'HOME') }}/.local/share/fonts"
     remote_src: yes
 
+# JetBrains Mono
+#
 - name: ensure tmp directory exists
   file:
     path: "{{ lookup('env', 'HOME') }}/.tmp/JetBrainsMono/"
@@ -45,6 +47,42 @@
 - name: Install JetBrains Mono
   copy:
     src: "{{ lookup('env', 'HOME') }}/.tmp/JetBrainsMono/fonts/ttf/" 
+    dest: "{{ lookup('env', 'HOME') }}/.local/share/fonts"
+
+# FontAwesome
+#
+- name: Fontawesome: ensure tmp directory exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.tmp/FontAwesome/"
+    state: directory
+
+- name: Download FontAwesome
+  unarchive:
+    src: https://use.fontawesome.com/releases/v5.15.4/fontawesome-free-5.15.4-desktop.zip 
+    dest: "{{ lookup('env', 'HOME') }}/.tmp/FontAwesome/"
+    remote_src: yes
+
+- name: Install FontAwesome
+  copy:
+    src: "{{ lookup('env', 'HOME') }}/.tmp/FontAwesome/fontawesome-free-5.15.4-desktop/otfs/" 
+    dest: "{{ lookup('env', 'HOME') }}/.local/share/fonts"
+
+# Souce Sans 
+#https://github.com/adobe-fonts/source-sans/releases/download/3.046R/TTF-source-sans-3.046R.zip
+- name: SourceSans: ensure tmp directory exists
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.tmp/SourceSans/"
+    state: directory
+
+- name: Download SourceSans
+  unarchive:
+    src: https://github.com/adobe-fonts/source-sans/releases/download/3.046R/TTF-source-sans-3.046R.zip
+    dest: "{{ lookup('env', 'HOME') }}/.tmp/SourceSans/"
+    remote_src: yes
+
+- name: Install SourceSans
+  copy:
+    src: "{{ lookup('env', 'HOME') }}/.tmp/SourceSans/TTF/" 
     dest: "{{ lookup('env', 'HOME') }}/.local/share/fonts"
 
 - name: Update font-cache
