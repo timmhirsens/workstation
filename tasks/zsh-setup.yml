@@ -51,7 +51,7 @@
 
 # FontAwesome
 #
-- name: Fontawesome: ensure tmp directory exists
+- name: "Fontawesome: ensure tmp directory exists"
   file:
     path: "{{ lookup('env', 'HOME') }}/.tmp/FontAwesome/"
     state: directory
@@ -69,7 +69,7 @@
 
 # Souce Sans 
 #https://github.com/adobe-fonts/source-sans/releases/download/3.046R/TTF-source-sans-3.046R.zip
-- name: SourceSans: ensure tmp directory exists
+- name: "SourceSans: ensure tmp directory exists"
   file:
     path: "{{ lookup('env', 'HOME') }}/.tmp/SourceSans/"
     state: directory
